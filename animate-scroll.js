@@ -1,15 +1,8 @@
-/*
-Plugin Name: jQuery Animation Scroll Plugin
-Author: Jason Lusk
-URI: JasonLusk.com
-Example:
-<p data-animate-scroll='{"scaleX": "1.5","scaleY": "1.5","x": "-10","y": "-10","rotation": "-3","alpha": "1","easingType": "Cubic.easeOut","duration": "1"}'>test</p>
- */
 (function($, window, document) {
     'use strict';
     var $window = $(window),
         attachEvent = document.attachEvent,
-        //init scroll-event only once for better performance -> save target-data first in arrays
+      
         animateScroll = {
             throttles: {},
             animations: [],
@@ -18,7 +11,7 @@ Example:
                     if(evt.type == 'play' && !options.reverse){
                         return true;
                     }
-                    // animate target object based on viewport check event
+               
                     var $this = $(this),
                         $timeline = $this.data('tween'),
                         action;
@@ -42,7 +35,8 @@ Example:
                 animateScroll.throttles.watch = el;
             },
             check: function(target) {
-                // is stored original element position centered within the viewport
+            
+            
                 var tObj = $(target),
                     vTop = $window.scrollTop(),
                     vBottom = vTop + $window.height(),
@@ -71,7 +65,7 @@ Example:
                 animateScroll.animations.each(function() {
                     var $this = $(this),
                         $timeline = $this.data('tween');
-                    // update trigger position
+       
                     if (!!resize) {
                         setTimeout(function() {
                             animateScroll.update($this, $timeline);
@@ -88,12 +82,12 @@ Example:
             },
             init: function(animations, options) {
 
-                // add resize event to body
+                
                 addResizeListener($('body')[0], function() {
                     $('body').trigger('resize');
                 });
 
-                // function to initialize plugin and pass custom variables from html5 data attributes
+                
                 animations.each(function() {
                         var $el = $(this);
                         $el
@@ -105,7 +99,7 @@ Example:
                     });
             },
             setup: function($this, $parent, options) {
-                // setup parent element perspective
+               
                 TweenMax.set($parent, {
                     transformPerspective: options.transformPerspective,
                     onComplete: function() {
